@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { SelectListComponent } from './components/select-list/select-list.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [SelectListComponent],
+  template: `
+    <h1>{{ title }}</h1>
+    <app-select-list></app-select-list>
+  `,
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'dropdown-select';

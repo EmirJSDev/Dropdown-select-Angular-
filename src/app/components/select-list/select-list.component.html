@@ -1,0 +1,40 @@
+<div class="dropdown">
+  <div class="dropdown-field" (click)="toggleDropdown()">
+    <span>{{ selectedText }}</span>
+    <span>▼</span>
+  </div>
+
+  <div class="dropdown-list" *ngIf="isOpen">
+    <!-- Категории и шаги -->
+    <div *ngFor="let funnel of funnels; let i = index" class="category">
+      <div
+        class="category-header"
+        (click)="funnel.expanded = !funnel.expanded"
+      >
+        <span>{{ funnel.expanded ? '−' : '+' }}</span> {{ funnel.name }}
+      </div>
+      <ul *ngIf="funnel.expanded" class="steps">
+        <!-- Кнопки управления для каждой воронки -->
+        <div class="controls">
+          <button (click)="selectAll(i)">Выбрать всё</button>
+          <button (click)="clearAll(i)">Снять выделение</button>
+        </div>
+
+        <li
+          *ngFor="let step of funnel.steps"
+          class="step"
+          [style.background-color]="step.color"
+        >
+          <label>
+            <input
+              type="checkbox"
+              [(ngModel)]="step.selected"
+              (change)="updateSelection()"
+            />
+            {{ step.name }}
+          </label>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
